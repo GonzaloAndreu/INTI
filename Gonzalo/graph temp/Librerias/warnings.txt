@@ -1,0 +1,6 @@
+Baja resist - 2 patrones v 1.3.vi
+  Virtual Instrument
+    - The subVI expected to be at "C:\Documents and Settings\Administrador\Escritorio\Baja resist\Programa Fuente - Baja Resist\Baja Resist v2.4\Librerias\caja de relays\abrir todos.vi" was loaded from "F:\Bajo Valor\Baja resist @ Med AC-DC1\Programa Fuente - Baja Resist\Baja Resist v2.4\Librerias\caja de relays\abrir todos.vi".
+seleccionador.vi
+  Virtual Instrument
+    - The subVI expected to be at "C:\Documents and Settings\Administrador\Escritorio\Baja resist\Programa Fuente - Baja Resist\Baja Resist v2.4\Librerias\caja de relays\abrir todos.vi" was loaded from "F:\Bajo Valor\Baja resist @ Med AC-DC1\Programa Fuente - Baja Resist\Baja Resist v2.4\Librerias\caja de relays\abrir todos.vi".
