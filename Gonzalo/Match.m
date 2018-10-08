@@ -1,6 +1,5 @@
 function M = Match(Temp,Res)
-%Res=MRes1;
-%Temp=MTemp1;
+
 LR = length(Res(:,1));
 LT = length(Temp(:,1));
 a  = 0.0039324534;
@@ -29,10 +28,10 @@ else
     for i = 1:LR
         for j=1:LT-1;
             if Res(i,1) > Temp(j,1) && Res(i,1) < Temp(j+1,1)
-                if (Res(i,1)-Tepm(j,1)) <= (Temp(j+1,1)-Res(i,1))
+                if (Res(i,1)-Temp(j,1)) <= (Temp(j+1,1)-Res(i,1))
                     M(k,:) = [Res(i,1),f(Temp(j,2)),Res(i,3)];
                 end
-                if (Temp(i,1)-Res(j,1)) > (Res(j+1,1)-Temp(i,1))
+                if (Res(i,1)-Temp(j,1)) > (Temp(j+1,1)-Res(i,1))
                     M(k,:) = [Res(i,1),f(Temp(j+1,2)),Res(i,3)];
                 end
                 k=k+1;
@@ -40,5 +39,5 @@ else
         end        
     end
 end
-
+M
 end
