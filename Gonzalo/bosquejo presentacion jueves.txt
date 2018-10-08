@@ -1,0 +1,7 @@
+*aprendi a manejar el puente comparador, su funcionamiento y distibts cuidados a tner en cuenta a la hoara de utilizar el nstrumental.
+
+*realice mediciones en resistores de para ver cual era la tendencia con la temperatura
+
+*arme la "caja termica"
+*se enontro una cosa extaña en la medicion de la resistencia con la tempeatura, apareieron los saltos....
+(probar simulacion numerica de variaciones en el resistor patron paa ver si se le podrian achacar a este)
