@@ -4,6 +4,7 @@ if r==2
   T= (-99.95346*0.0039183615+((99.95346*0.0039183615)^2-4*(-5.6337919e-7)*99.95346*(99.95346-t))^(1/2))/(2*99.95346*(-5.6337919e-7));
 end
 Patron=P*(1+(T-To)*a1+b1*(T-To)^2);
+q = length(Res(1,:));
 LR = length(Res(:,1));
 LT = length(Temp(:,1));
 a  = 0.0039324534;
@@ -18,10 +19,10 @@ if LT <= LR
         for j=1:LR-1;
             if Temp(i,1) > Res(j,1) && Temp(i,1) < Res(j+1,1)
                 if (Temp(i,1)-Res(j,1)) <= (Res(j+1,1)-Temp(i,1))
-                    M(k,:) = [Temp(i,1),f(Temp(i,2)),Res(j,3)*Patron];
+                    M(k,:) = [Temp(i,1),f(Temp(i,2)),Res(j,q)*Patron];
                 end
                 if (Temp(i,1)-Res(j,1)) > (Res(j+1,1)-Temp(i,1))
-                    M(k,:) = [Temp(i,1),f(Temp(i,2)),Res(j+1,3)*Patron];
+                    M(k,:) = [Temp(i,1),f(Temp(i,2)),Res(j+1,q)*Patron];
                 end
                 k=k+1;
             end
@@ -33,10 +34,10 @@ else
         for j=1:LT-1;
             if Res(i,1) > Temp(j,1) && Res(i,1) < Temp(j+1,1)
                 if (Res(i,1)-Temp(j,1)) <= (Temp(j+1,1)-Res(i,1))
-                    M(k,:) = [Res(i,1),f(Temp(j,2)),Res(i,3)*Patron];
+                    M(k,:) = [Res(i,1),f(Temp(j,2)),Res(i,q)*Patron];
                 end
                 if (Res(i,1)-Temp(j,1)) > (Temp(j+1,1)-Res(i,1))
-                    M(k,:) = [Res(i,1),f(Temp(j+1,2)),Res(i,3)*Patron];
+                    M(k,:) = [Res(i,1),f(Temp(j+1,2)),Res(i,q)*Patron];
                 end
                 k=k+1;
             end
