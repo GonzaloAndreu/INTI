@@ -1,0 +1,5 @@
+temepratura habitacion: 3/12/2018
+max: 109.755
+min: 109.4284
+avr: 109.5473
+#med: 7831
