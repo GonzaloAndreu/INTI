@@ -13,36 +13,37 @@ T0 = 0;
 R0 = 100.07271;
 k  = 1;
 M=[];
-f=@(x) T0 + (-R0*a+((R0*a)^2-4*b*R0*(R0-x))^(1/2))/(2*R0*b);
+%f=@(x) T0 + (-R0*a+((R0*a)^2-4*b*R0*(R0-x))^(1/2))/(2*R0*b);
+f=@(x) x + 24.582602450649823;
 if LT <= LR
     for i = 1:LT
       for j=1:LR-1;
         if Temp(i,1) > Res(j,1) && Temp(i,1) < Res(j+1,1)
           if (Temp(i,1)-Res(j,1)) <= (Res(j+1,1)-Temp(i,1))
             M(k,:) = [Temp(i,1),f(Temp(i,2)),Res(j,q)*Patron];
-            endif
+          end
           if (Temp(i,1)-Res(j,1)) > (Res(j+1,1)-Temp(i,1))
             M(k,:) = [Temp(i,1),f(Temp(i,2)),Res(j+1,q)*Patron];
-            endif
+          end
           k=k+1;
-          endif
-        endfor
-      endfor
+        end
+      end
+    end
     else
     for i = 1:LR
       for j=1:LT-1;
         if Res(i,1) > Temp(j,1) && Res(i,1) < Temp(j+1,1)
           if (Res(i,1)-Temp(j,1)) <= (Temp(j+1,1)-Res(i,1))
             M(k,:) = [Res(i,1),f(Temp(j,2)),Res(i,q)*Patron];
-            endif
+          end
           if (Res(i,1)-Temp(j,1)) > (Temp(j+1,1)-Res(i,1))
             M(k,:) = [Res(i,1),f(Temp(j+1,2)),Res(i,q)*Patron];
-            endif
+          end
           k=k+1;
-          endif
-        endfor        
-      endfor
-    endif
+        end
+      end
+    end
+end
 
-endfunction
+end
 
