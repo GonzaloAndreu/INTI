@@ -15,8 +15,8 @@ for i=2:l-1
     p(i-1)=(T(i+1)-T(i-1))/(t(1+i)-t(i-1));
 end
 Init=p(2)+(p(2)-p(1))*(t(1)-t(2))/(t(3)-t(2));
-End=p(l-2);
-Der=[t,[Init;p';End]];
+Endi=p(l-2);
+Der=[t,[Init;p';Endi]];
 end
 
 %%esto calcula la derivada de la temperatura en funcion del tiempo, para
