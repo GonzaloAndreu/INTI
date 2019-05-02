@@ -6,16 +6,16 @@ M1=Match(T1,R1,0,0,1,0,0,0);
 0.552913344746377 %incerteza de la medicion realizada el 26-Sep-18 finalizada a las 03:52:05 PM 
 
 graphics_toolkit("gnuplot");
-errorbar(M1(:,1),M1(:,3),M1(:,3)*0.552913344746377e-6);
-legend("Resistencia","box off","location","north")
+errorbar(M1(:,2),M1(:,3),M1(:,3)*0.552913344746377e-6);
+legend("Resistencia","location","northwest")
 set(gcf,'paperorientation','landscape')
 set(gca, 'fontsize', 15)
 set(ylabel('Resistencia (\mu\Omega)'),'fontsize', 20)
-set(xlabel('Hora de Medicion (s)'),'fontsize', 20)
+set(xlabel('Temperatura (°C)'),'fontsize', 20)
 %set(gcf,"paperposition", [0.00000 0.00000 8.00000 11.00000])
 grid
 
-print 'Resistencia400mmO.pdf'
+print 'ResVsTemp400mmO.pdf'
 
 
 %ahora lo mismo con la 2da medicion
