@@ -21,14 +21,12 @@ void setup(void)
 {
   sensors.begin();  // Start up the library
   Serial.begin(9600);
-  time_t t= now();
-  setTime(t); 
+
 }
 
 void loop(void)
 { 
-  time_t t= now();
-  // Send the command to get temperatures
+  // Send the command to get temperatures 
   sensors.requestTemperatures(); 
 
   //print the temperature in Celsius
@@ -43,12 +41,7 @@ void loop(void)
   Serial.println("F");
 
   
-  Serial.print(hour(t));
-  Serial.print(minute(t));
-  Serial.print(second(t));
-  Serial.print(day(t));
-  Serial.print(month(t));
-  Serial.print(year(t));
-  
+
+    
   delay(500);
 }
