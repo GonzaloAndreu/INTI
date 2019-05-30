@@ -19,7 +19,7 @@ function TTC=Trans_TC_Amb(Med_TC_TR,Tipo_TC,No_TermoRes) %Esta funcion recibe la
                 if Med_TC_TR(i,1)<12
                     a=0;
                 else
-                    a=10;
+                    a=12;
                 end
                 Tiempo_Med = (Med_TC_TR(i,1)-a)*3600+Med_TC_TR(i,2)*60+Med_TC_TR(i,3);
                 Delta_Temp_Amb = Termo_Cupla(j,1)+(Med_TC_TR(i,4)-Termo_Cupla(j,2))*(Termo_Cupla(j+1,1)-Termo_Cupla(j,1))/(Termo_Cupla(j+1,2)-Termo_Cupla(j,2));
