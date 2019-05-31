@@ -7,7 +7,10 @@ function TT=TU_Temp(Med_Temp,Tipo_Sensor)
 %       Tipo_Sensor:Vector que especifique el tipo de sensor utilizado, por
 %                   ejemplo, para una termocupla tipo K se debe poner el
 %                   imput 'k', para una termorecistencia, el numero de
-%                   termoresistencia, 
+%                   termoresistencia. Ponga '0' para ignorar alguna oclumna
+%                   particular
+%Es necesario que los datos de temperatura esten en un formato de columnas
+%de la siguiente manera [hora,minuto,segundos,Medicion de Temperatura (1:n)]
 %En caso de no estar agregado el caso es necesario agregarlo con un nuevo
 %if que responda la caso correspondiente
     if Med_Temp(1,1)<12
@@ -46,6 +49,10 @@ function TT=TU_Temp(Med_Temp,Tipo_Sensor)
         if Tipo_Sensor(h) == 'T' % "Calibracion" Termistor usado
             load('Termistor.mat')
             TTh=g(Param,Med_Temp(:,h+3));
+            TT=[TT,TTh];
+        end
+        if Tipo_Sensor(h) == 'D' % Datos tirados directamente por el Sensor Dallas
+            TTh=Med_Temp(:,h+3);
             TT=[TT,TTh];
         end
     end

@@ -18,17 +18,15 @@ M=[];
 %T1=24.582602450649823;
 %T1=0;
 %f=@(x) (1000000*x+0.931009998485077)/4.849671817401404 + T1;
-A_T=length(Temp(1,:));
-A_dT=length(dTemp(1,:));
 if LT <= LR
     for i = 1:LT
       for j=1:LR-1;
         if Temp(i,1) > Res(j,1) && Temp(i,1) < Res(j+1,1)
           if (Temp(i,1)-Res(j,1)) <= (Res(j+1,1)-Temp(i,1))
-            M(k,:) = [Temp(i,:),Res(j,q)*Patron,dTemp(i,2:A_dT)];
+            M(k,:) = [Temp(i,:),Res(j,q)*Patron,dTemp(i,2:3),Temp(i,2)^4]
           end
           if (Temp(i,1)-Res(j,1)) > (Res(j+1,1)-Temp(i,1))
-            M(k,:) = [Temp(i,:),Res(j+1,q)*Patron,dTemp(i,2:A_dT)];
+            M(k,:) = [Temp(i,:),Res(j+1,q)*Patron,dTemp(i,2:3),Temp(i,2)^4,]
           end
           k=k+1;
         end
@@ -39,10 +37,10 @@ if LT <= LR
       for j=1:LT-1;
         if Res(i,1) >= Temp(j,1) && Res(i,1) < Temp(j+1,1)
           if abs(Res(i,1)-Temp(j,1)) <= abs(Temp(j+1,1)-Res(i,1))
-            M(k,:) = [Res(i,1),Temp(j,2:A_T),Res(i,q)*Patron,dTemp(j,2:A_dT)];
+            M(k,:) = [Res(i,1),Temp(j,2),Res(i,q)*Patron,dTemp(j,2),Temp(j,2)^4,Temp(j,3),dTemp(j,3)];
           end
           if abs(Res(i,1)-Temp(j,1)) > abs(Temp(j+1,1)-Res(i,1))
-            M(k,:) = [Res(i,1),Temp(j+1,2:A_T),Res(i,q)*Patron,dTemp(j+1,2:A_dT)];
+            M(k,:) = [Res(i,1),Temp(j+1,2),Res(i,q)*Patron,dTemp(j+1,2),Temp(j+1,2)^4,Temp(j+1,3),dTemp(j+1,3)];
           end
           k=k+1;
         end

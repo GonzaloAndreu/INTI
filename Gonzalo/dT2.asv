@@ -10,8 +10,6 @@ for i=2:l-1
 end
 Init=p(2,:)+(p(2,:)-p(1,:))*(Time(1)-Time(2))/(Time(3)-Time(2));
 End=p(l-2,:);
-if length(p(:,1))<length(p(1,:))
-    p=p'
-end
+if length(p)
 Derivate=[Time,[Init;p;End]];
 end
