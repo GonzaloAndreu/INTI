@@ -35,11 +35,11 @@ if LT <= LR
     else
     for i = 1:LR
       for j=1:LT-1;
-        if Res(i,1) > Temp(j,1) && Res(i,1) < Temp(j+1,1)
-          if (Res(i,1)-Temp(j,1)) <= (Temp(j+1,1)-Res(i,1))
+        if Res(i,1) >= Temp(j,1) && Res(i,1) < Temp(j+1,1)
+          if abs(Res(i,1)-Temp(j,1)) <= abs(Temp(j+1,1)-Res(i,1))
             M(k,:) = [Res(i,1),Temp(j,2),Res(i,q)*Patron,dTemp(j,2),Temp(j,2)^4,Temp(j,3),dTemp(j,3)];
           end
-          if (Res(i,1)-Temp(j,1)) > (Temp(j+1,1)-Res(i,1))
+          if abs(Res(i,1)-Temp(j,1)) > abs(Temp(j+1,1)-Res(i,1))
             M(k,:) = [Res(i,1),Temp(j+1,2),Res(i,q)*Patron,dTemp(j+1,2),Temp(j+1,2)^4,Temp(j+1,3),dTemp(j+1,3)];
           end
           k=k+1;
