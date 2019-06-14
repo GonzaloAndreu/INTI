@@ -1,0 +1,5 @@
+class_spec: drivers:TemperatureSensor
+fqbn: ''
+port: ''
+sketch_folder: F:\gonzalo andreu\INTI\Gonzalo\Arduino\Programacion Sensor Dallas\arduino-qt-continuous\TemperatureSensor
+usbID: ''
