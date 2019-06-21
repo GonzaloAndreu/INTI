@@ -1,4 +1,5 @@
 
+import numpy as np
 import time
 
 from lantz.core import ureg
@@ -39,14 +40,28 @@ class TemperatureMonitor(Backend):
         self.timer = QtCore.QTimer()
         self.timer.setInterval(interval) # ms
         self.timer.timeout.connect(self.update_temperature)
-
+        
+        # esto es para guardar los datos de temperatura
+        header = "X-Column, Y-Column\n"
+        Current_Date=time.ctime()
+        Year=Current_Date[20:24]
+        Month=Current_Date[4:7]
+        Day=Current_Date[8:10]
+        Hour=Current_Date[11:13]
+        Minute=Current_Date[14:16]
+        Second=Current_Date[17:19]
+        self.f = open('Dallas_{}_{}_{}_{}{}{}.txt'.format(Year,Month,Day,Hour,Minute,Second), 'w')
+        
+       
     def update_temperature(self):
         self.log_debug('Updating temperature')
-
         now = time.monotonic() * ureg.ms
         temp = self.board.temperature
         self.new_data.emit(now, temp)
         self.log_debug('The temperature is {} at {}'.format(temp, now))
+        Dato='{}'.format(temp) #['{}:{}:{}'.format(time.ctime()[11:13],time.ctime()[14:16],time.ctime()[17:19])],           
+        self.f.write(Dato)
+        
 
     def start_stop(self, value):
         if value:
@@ -57,6 +72,8 @@ class TemperatureMonitor(Backend):
             self.timer.stop()
             self.stopped.emit()
             self.log_debug('Timer stopped')
+                    
+         
 
 
 # This is a very simple interface containing:

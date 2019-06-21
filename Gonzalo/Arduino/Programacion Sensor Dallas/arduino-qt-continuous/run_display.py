@@ -35,10 +35,10 @@ if __name__ == '__main__':
     # - initialize the driver
     # - finalize the driver (even if there was a bug and the software crashes!)
 
-    with QTemperatureSensor.via_serial('TemperatureSensor.pack.yaml') as board:
+    with QTemperatureSensor.via_serial('COM9') as board:
         # We then create the backend and provide the driver we have just created
         # This will be bound to the corresponding instrument slot
-        app = TemperatureMonitor(interval=5 * ureg.second, board=board)
+        app = TemperatureMonitor(interval=0.5 * ureg.second, board=board)
 
         # Then we use the start_gui_app. Notice that we provide the class for the Ui, not an instance
         start_gui_app(app, TemperatureMonitorUi)

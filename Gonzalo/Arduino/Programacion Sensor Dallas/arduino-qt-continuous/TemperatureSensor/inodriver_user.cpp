@@ -25,13 +25,15 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
 void user_setup() {
-
+    
     sensors.begin();  // Start up the library
 }
 
 void user_loop() {
     // Send the command to get temperatures 
-  sensors.requestTemperatures(); 
+  sensors.requestTemperatures();
+  delay(250);
+     
 }
 // COMMAND: TEMP, FEAT: temperature
 float get_TEMP() {
