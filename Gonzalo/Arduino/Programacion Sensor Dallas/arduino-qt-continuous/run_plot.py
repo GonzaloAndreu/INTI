@@ -37,7 +37,7 @@ if __name__ == '__main__':
     # - finalize the driver (even if there was a bug and the software crashes!)
 
     
-    with QTemperatureSensor.via_serial('COM9') as board:
+    with QTemperatureSensor.via_serial('COM7') as board:
         # We then create the backend and provide the driver we have just created
         # This will be bound to the corresponding instrument slot
         app = TemperatureMonitor(interval=0.5 * ureg.second, board=board)

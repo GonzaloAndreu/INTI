@@ -1,6 +1,7 @@
 
 import numpy as np
 import time
+from datetime import datetime
 
 from lantz.core import ureg
 
@@ -36,21 +37,17 @@ class TemperatureMonitor(Backend):
         except:
             pass
 
+        # esto es para guardar los datos de temperatura
+        self.Current_Date=datetime.now().strftime('%y_%m_%d_%H%M%S')
+        self.f = open('Dallas_{}.txt'.format(self.Current_Date), 'w')
+        self.f.close()
+        
+        
         # This timer will run periodically and call update temperature.
         self.timer = QtCore.QTimer()
         self.timer.setInterval(interval) # ms
         self.timer.timeout.connect(self.update_temperature)
-        
-        # esto es para guardar los datos de temperatura
-        header = "X-Column, Y-Column\n"
-        Current_Date=time.ctime()
-        Year=Current_Date[20:24]
-        Month=Current_Date[4:7]
-        Day=Current_Date[8:10]
-        Hour=Current_Date[11:13]
-        Minute=Current_Date[14:16]
-        Second=Current_Date[17:19]
-        self.f = open('Dallas_{}_{}_{}_{}{}{}.txt'.format(Year,Month,Day,Hour,Minute,Second), 'w')
+        self.timer.timeout.connect(self.save_values)
         
        
     def update_temperature(self):
@@ -59,10 +56,13 @@ class TemperatureMonitor(Backend):
         temp = self.board.temperature
         self.new_data.emit(now, temp)
         self.log_debug('The temperature is {} at {}'.format(temp, now))
-        Dato='{}'.format(temp) #['{}:{}:{}'.format(time.ctime()[11:13],time.ctime()[14:16],time.ctime()[17:19])],           
-        self.f.write(Dato)
         
-
+    def save_values(self):
+        self.f = open('Dallas_{}.txt'.format(self.Current_Date), 'a')
+        temp = self.board.temperature
+        self.f.write("{} , {};\n".format(datetime.timetz(datetime.now()).strftime('%H:%M:%S.%f')[:-4],temp))
+        self.f.close()
+        
     def start_stop(self, value):
         if value:
             self.timer.start()
