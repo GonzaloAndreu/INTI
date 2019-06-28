@@ -38,9 +38,10 @@ class TemperatureMonitor(Backend):
             pass
 
         # esto es para guardar los datos de temperatura
-        self.Current_Date=datetime.now().strftime('%y_%m_%d_%H%M%S')
-        self.f = open('Dallas_{}.txt'.format(self.Current_Date), 'w')
-        self.f.close()
+        self.Current_Date=[]#datetime.now().strftime('%y_%m_%d_%H%M%S')
+        self.f = []#open('Dallas_{}.txt'.format(self.Current_Date), 'w')
+        #self.f.close()
+        self.temp=[]
         
         
         # This timer will run periodically and call update temperature.
@@ -53,25 +54,25 @@ class TemperatureMonitor(Backend):
     def update_temperature(self):
         self.log_debug('Updating temperature')
         now = time.monotonic() * ureg.ms
-        temp = self.board.temperature
-        self.new_data.emit(now, temp)
-        self.log_debug('The temperature is {} at {}'.format(temp, now))
+        self.temp = self.board.temperature
+        self.new_data.emit(now, self.temp)
+        self.log_debug('The temperature is {} at {}'.format(self.temp, now))
         
     def save_values(self):
-        self.f = open('Dallas_{}.txt'.format(self.Current_Date), 'a')
-        temp = self.board.temperature
-        self.f.write("{} , {};\n".format(datetime.timetz(datetime.now()).strftime('%H:%M:%S.%f')[:-4],temp))
-        self.f.close()
+        self.f.write("{} , {};\n".format(datetime.timetz(datetime.now()).strftime('%H:%M:%S.%f')[:-4],self.temp))
         
     def start_stop(self, value):
         if value:
             self.timer.start()
             self.started.emit()
             self.log_debug('Timer started')
+            self.Current_Date=datetime.now().strftime('%y_%m_%d_%H%M%S')
+            self.f = open('Dallas_{}.txt'.format(self.Current_Date), 'w')            
         else:
             self.timer.stop()
             self.stopped.emit()
             self.log_debug('Timer stopped')
+            self.f.close()
                     
          
 
@@ -89,7 +90,8 @@ class TemperatureMonitorUi(Frontend):
 
     # Instead of drawing the gui programatically, we use QtDesigner and just load it.
     # The resulting gui will be inside an attribute named widget
-    gui = 'temperature_continuous.ui'
+#    gui = 'temperature_continuous.ui'
+    gui= 'LED.ui'
 
     def connect_backend(self):
 
@@ -102,12 +104,15 @@ class TemperatureMonitorUi(Frontend):
         #  the temperature widget
         #  to the board instrument in the backend,
         #  and specifically to the feat named temperature (Notice that is a string)
-        self.connect_feat(self.widget.temperature, self.backend.board, 'temperature')
+#        self.connect_feat(self.widget.temperature, self.backend.board, 'temperature')
 
+        self.connect_feat(self.widget.temperature, self.backend.board, 'temperature')
         # We also connect the check box
         # Check boxes in Qt are annoying because they have 3 states: Unchecked(0)/PartiallyChecked(1)/Checked(2)
         # We go through the lambda function so that the Backend receives a boolean value.
-        self.widget.chk_update.stateChanged.connect(lambda new_value: self.backend.start_stop(new_value == 2))
+        self.widget.start_button.clicked.connect(lambda : self.backend.start_stop(True))
+        self.widget.stop_button.clicked.connect(lambda : self.backend.start_stop(False))
+#        self.widget.chk_update.stateChanged.connect(lambda new_value: self.backend.start_stop(new_value == 2))  # esto de aca anda, si es necesario medir antes de que ete todo terminada, solo hay que descomentar esta linea y comentar lo naterior qeu empiece con self.widget.()
 
 
 # This interface combines the previous one with a chart
