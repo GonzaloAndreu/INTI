@@ -26,6 +26,7 @@ if LT <= LR
     for i = 1:LT
       for j=1:LR-1;
         if Temp(i,1) > Res(j,1) && Temp(i,1) < Res(j+1,1)
+            M(k,:)=[Temp(i,:),Res(j,q)*Patron,dTemp(i,2:A_dT)];
           if (Temp(i,1)-Res(j,1)) <= (Res(j+1,1)-Temp(i,1))
             M(k,:) = [Temp(i,:),Res(j,q)*Patron,dTemp(i,2:A_dT)];
           end
