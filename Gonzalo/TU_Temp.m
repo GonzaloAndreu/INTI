@@ -52,7 +52,13 @@ function TT=TU_Temp(Med_Temp,Tipo_Sensor)
             TT=[TT,TTh];
         end
         if Tipo_Sensor(h) == 'D' % Datos tirados directamente por el Sensor Dallas
-            TTh=Med_Temp(:,h+3);
+            load('Arduino\Analisis de Ruido y Error de Sensor Dallas\Dallas.mat')
+            coef=Dallas.Caracterizacion.Coef;
+            TTh=polyval(coef,Med_Temp(:,h+3));
+            TT=[TT,TTh];
+        end
+        if Tipo_Sensor(h) == 'P' % Datos tirados directamente por el Sensor Dallas
+            TTh=(0.201316875336101*Med_Temp(:,h+3)-0.513665248586457)*1000000;
             TT=[TT,TTh];
         end
     end

@@ -35,7 +35,7 @@ ylabel('\Delta T (°C)','FontSize',20);
 ax = gca;
 ax.FontSize = 15
 
-%## a partir de aca vamoa otra cosa
+%## a partir de aca vamos a otra cosa
 
 
 load('Termistor.mat')
