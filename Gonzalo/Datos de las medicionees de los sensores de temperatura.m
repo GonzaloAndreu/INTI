@@ -1,6 +1,7 @@
 load('Medicion_20190531_TresSensoresDeTemperatura.mat')
 
 
+Med_Par_Dallas=Match5(TempMed_Dallas,dTempMed_Dallas,ResMed,052,20.024);
 hold
 
 plot(TempMed_TCK_Termistor(:,1),TempMed_TCK_Termistor(:,3)-TempMed_TCK_Termistor(1,3));
@@ -9,6 +10,8 @@ plot(TempMed_Dallas(:,1),TempMed_Dallas(:,2))%-TempMed_Dallas(1,2))
 
 
 %%esto de aca abajo es si se usa el  archivo con nombre 'Medicion190524'
+TempMed_Dallas=TU_Temp(Crudo_Temperatura_Dallas,'D');
+
 k=1;
 NewMed=[];
 for i=1:length(TempMed_Dallas(:,1))
@@ -35,6 +38,8 @@ ylabel('\Delta T (°C)','FontSize',20);
 ax = gca;
 ax.FontSize = 15
 
+std(NewMed(10100:10500,2))
+
 %## a partir de aca vamos a otra cosa
 
 
@@ -56,3 +61,5 @@ ylabel('Temperatura (°C)','FontSize',20);
 
 ax = gca;
 ax.FontSize = 15
+
+std(A(:,2)-g(Param,A(:,1)))

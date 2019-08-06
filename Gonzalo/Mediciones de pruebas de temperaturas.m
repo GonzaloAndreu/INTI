@@ -11,7 +11,7 @@ Temp=TU_Temp(CrudoTemperatura,['T',0]);
 dTemp=dT2(Temp);
 Resultado=Match5(Temp,dTemp,Res,052,20);
 
-Termistor.Resultado=Resultado;
+Resultado=Termistor.Resultado;
 plot(Resultado(:,2)-Resultado(1,2),Resultado(:,3))
 %grafico de la variacion de temperatura del resistor en funcion del tiempo
 %que tomo hacerla medicion, osea deltaTvsMinutos
@@ -28,6 +28,8 @@ ylabel('\Delta T (°C)','FontSize',20);
 ax = gca;
 ax.FontSize = 15
 
+u=std(Temp(2400:2700,2)-Temp(1,2))
+Termistor.Incertidumbre=u
 
 %Prueba con termocupla
 Bien=load('Medicion190412-TCK.mat')
@@ -48,8 +50,7 @@ Mal.Resultado=Match5(Mal.TempMed,Mal.dTempMed,Mal.ResMed,052,20);
 
 
 hold
-plot((Bien.TempMed(:,1)-Bien.TempMed(1,1))/60,Bien.TempMed(:,2)-Bien.TempMed(1,2))
-%plot((Mal.TempMed(:,1)-Mal.TempMed(1,1))/60,Mal.TempMed(:,2)-Mal.TempMed(1,2))
+clear%plot((Mal.TempMed(:,1)-Mal.TempMed(1,1))/60,Mal.TempMed(:,2)-Mal.TempMed(1,2))
 
 legend('Termocupla tipo K','location','southeast');
 lgd = legend;
