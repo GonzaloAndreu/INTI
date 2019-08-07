@@ -32,9 +32,7 @@ hold
 plot(Resultados(10:fin,2),Resultados(10:fin,4))
 plot(x,polyval(a,x),'r')
 
-STD=std(polyval(a,Resultados(10:fin,2))-Resultados(10:fin,4))
-
-
+STD=std()
 legend('Medicion con el puente','ajuste','location','northeast');
 lgd = legend;
 lgd.FontSize = 20;
@@ -68,10 +66,7 @@ PT=PR0*(1+Pa*(T-PT0)+Pb*(T-PT0)^2);
 dPT=Pu*(1+Pa*(T-PT0)+Pb*(T-PT0)^2)/2; %se divide por dos por el factor de cobertura
 
 %incertidumbre asociada a la medicion minima del puente
-medmin=0.001;
-dMinPuente=medmin/(12^(1/2));
-
-
+dMinPuente=0;
 
 %incertidumre asociada a la medicion de temperatura con el sensor dallas
 %se desprecia el aporte a la incertudumbre de las variacioes de la
@@ -88,7 +83,7 @@ uminT=R0*alfa*minDallas/(12^(1/2)) %se asume que la distribucion de probabilidad
 
 
 %incertidumbre combinada del valor de resistencia medido
-ucR0=(uminT^2+duT^2+dPT^2+dMinPuente^2+STD^2)^(1/2);
+ucR0=(uminT^2+duT^2+dPT^2+dMinPuente^2)^(1/2);
 
 %incertidumbre expandida
 ueR0=2*ucR0
