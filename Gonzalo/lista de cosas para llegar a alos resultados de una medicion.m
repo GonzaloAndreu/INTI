@@ -73,17 +73,17 @@ dMinPuente=medmin/(12^(1/2));
 
 
 
-%incertidumre asociada a la medicion de temperatura con el sensor dallas
+%incertidumre estadistica asociada a la medicion de temperatura con el sensor dallas
 %se desprecia el aporte a la incertudumbre de las variacioes de la
 %temperatura del baño termico en el que estan sumergidos los patrones
 
-stdDallas=0.5; %dato de datasheet
+stdDallas=0.27; %desvio estándar
 uT=stdDallas;
 duT=R0*alfa*uT;
 
 %incertidumbre asociada a la resolucion del sensor dallas
 
-minDallas=0.1; %dato de utilización
+minDallas=0.5; %dato datashet
 uminT=R0*alfa*minDallas/(12^(1/2)) %se asume que la distribucion de probabilidades es rectangular
 
 
@@ -102,6 +102,7 @@ Proceso.Caracterizacion.T0=T0;
 Proceso.Caracterizacion.alfa=alfa;
 Proceso.Caracterizacion.beta=beta;
 
+Proceso.Caracterizacion
 
 
 
