@@ -65,10 +65,12 @@ PT0=0
 T=20.024 %temperatura del baño
 %incertidumbre asociado al patron, viene de certificado
 PT=PR0*(1+Pa*(T-PT0)+Pb*(T-PT0)^2);
-dPT=Pu*(1+Pa*(T-PT0)+Pb*(T-PT0)^2)/2; %se divide por dos por el factor de cobertura
+dPT=Pu/2; %se divide por dos por el factor de cobertura
 
+
+PR0*Pa*0.001
 %incertidumbre asociada a la medicion minima del puente
-medmin=0.001;
+medmin=0.00004;
 dMinPuente=medmin/(12^(1/2));
 
 
@@ -83,7 +85,7 @@ duT=R0*alfa*uT;
 
 %incertidumbre asociada a la resolucion del sensor dallas
 
-minDallas=0.5; %dato datashet
+minDallas=0.06; %dato datashet
 uminT=R0*alfa*minDallas/(12^(1/2)) %se asume que la distribucion de probabilidades es rectangular
 
 
